@@ -27,11 +27,34 @@ def make_chains(text_string):
         {('hi', 'there'): ['mary', 'juanita'], ('there', 'mary'): ['hi'], ('mary', 'hi': ['there']}
     """
 
-    chains = {}
+# initialize empty dictionary
+# call open_and_read
+# # for loop - if indices 0 and 1 of contents exist in dictionary key tuple list, add index 2 to value list
+# #     if indices 0 and 1 do not exist in dictionary key tuple list, add both the key tuple and value
+# #       remove first element of string
+# # return dictionary
 
-    # your code goes here
+    chains = {('word', 'stuff'): [1, 2], ('omg', 'wow'): [3, 4], ('Would', 'you'): [5, 6]}
 
-    return chains
+#     # your code goes here
+    words = text_string.split()
+    
+    for word in words: 
+        bigram = (words[0], words[1])
+        if bigram in chains.keys():
+            next_words = chains[bigram]             
+            next_words.append(words[2])
+            chains[bigram] = next_words
+            words = words[1:]
+        
+        else:
+            chains[bigram] = []
+            next_words.append(words[2])
+            chains[bigram] = next_words
+            words = words[1:]
+        
+    print words
+    
 
 
 def make_text(chains):
