@@ -9,8 +9,13 @@ def open_and_read_file(file_path):
     """
 
     # your code goes here
-    contents = open(file_path).read()
-    contents = contents.replace('\n', ' ')
+    f = open(file_path)
+
+    contents = f.read()
+
+    f.close()
+
+    # contents = contents.replace('\n', ' ')
     return contents
 
 
@@ -29,32 +34,27 @@ def make_chains(text_string):
 
 # initialize empty dictionary
 # call open_and_read
-# # for loop - if indices 0 and 1 of contents exist in dictionary key tuple list, add index 2 to value list
+# # while loop - if indices 0 and 1 of contents exist in dictionary key tuple list, add index 2 to value list
 # #     if indices 0 and 1 do not exist in dictionary key tuple list, add both the key tuple and value
 # #       remove first element of string
 # # return dictionary
 
-    chains = {('word', 'stuff'): [1, 2], ('omg', 'wow'): [3, 4], ('Would', 'you'): [5, 6]}
+    chains = {}
 
 #     # your code goes here
     words = text_string.split()
-    
-    for word in words: 
+
+    while len(words) > 2:
         bigram = (words[0], words[1])
         if bigram in chains.keys():
-            next_words = chains[bigram]             
-            next_words.append(words[2])
-            chains[bigram] = next_words
-            words = words[1:]
-        
+            chains[bigram].append(words[2])
+                        
         else:
-            chains[bigram] = []
-            next_words.append(words[2])
-            chains[bigram] = next_words
-            words = words[1:]
+            chains[bigram] = [ words[2] ]
         
-    print words
-    
+        words = words[1:]
+
+    print chains
 
 
 def make_text(chains):
