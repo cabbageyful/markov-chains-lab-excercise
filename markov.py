@@ -54,17 +54,26 @@ def make_chains(text_string):
         
         words = words[1:]
 
-    print chains
-
+    return chains
 
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
 
+# initiliaze empty string
+# pick random tuple key
+# if key exists then...
+# string = join tuple key and value
+# return the next tuple key which would be second and third words of the new string
+
     text = ""
-
+    
     # your code goes here
+    random_phrase = choice(chains.keys())
+    if random_phrase in chains.keys(): # cannot concatenate str and tup
+        text = text + random_phrase + choice(chains[random_phrase])
+        print text
 
-    return text
+    # return text
 
 
 input_path = "green-eggs.txt"
