@@ -67,7 +67,6 @@ def make_text(chains):
 
     text = []
     
-    # your code goes here
     random_phrase = choice(chains.keys())
         
     while random_phrase in chains.keys():
@@ -76,17 +75,15 @@ def make_text(chains):
             # .extend and .append are on two separate lines because each
             # method changes the list in place and doesn't return an object
             text.extend(next_two)
-            text.append(choice(chains[random_phrase]))
             
-        else:
-            text.append(choice(chains[random_phrase]))
+        text.append(choice(chains[random_phrase]))
 
         random_phrase = (text[-2], text[-1])
 
     text = ' '.join(text)
 
     return text
-    # return text
+
 
 
 input_path = "green-eggs.txt"
