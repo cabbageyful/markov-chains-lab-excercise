@@ -65,14 +65,27 @@ def make_text(chains):
 # string = join tuple key and value
 # return the next tuple key which would be second and third words of the new string
 
-    text = ""
+    text = []
     
     # your code goes here
     random_phrase = choice(chains.keys())
-    if random_phrase in chains.keys():
-        text = "{} {} {} {}".format(text, random_phrase[0], random_phrase[1], 
-            choice(chains[random_phrase]))
-    print text
+        
+    while random_phrase in chains.keys():
+        next_two = [random_phrase[0], random_phrase[1]] 
+        if text == []:    
+            # .extend and .append are on two separate lines because each
+            # method changes the list in place and doesn't return an object
+            text.extend(next_two)
+            text.append(choice(chains[random_phrase]))
+            
+        else:
+            text.append(choice(chains[random_phrase]))
+
+        random_phrase = (text[-2], text[-1])
+
+    text = ' '.join(text)
+
+    return text
     # return text
 
 
