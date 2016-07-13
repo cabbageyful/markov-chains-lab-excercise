@@ -1,5 +1,7 @@
 from random import choice
 
+import sys
+
 
 def open_and_read_file(file_path):
     """Takes file path as string; returns text as string.
@@ -8,18 +10,16 @@ def open_and_read_file(file_path):
     the file's contents as one string of text.
     """
 
-    # your code goes here
-    f = open(file_path)
+    file_path = open(sys.argv[1])
 
-    contents = f.read()
+    contents = file_path.read()
 
-    f.close()
+    file_path.close()
 
-    # contents = contents.replace('\n', ' ')
     return contents
 
 
-def make_chains(text_string):
+def make_chains(text_string, n):
     """Takes input text as string; returns _dictionary_ of markov chains.
 
     A chain will be a key that consists of a tuple of (word1, word2)
@@ -32,20 +32,27 @@ def make_chains(text_string):
         {('hi', 'there'): ['mary', 'juanita'], ('there', 'mary'): ['hi'], ('mary', 'hi': ['there']}
     """
 
-# initialize empty dictionary
-# call open_and_read
-# # while loop - if indices 0 and 1 of contents exist in dictionary key tuple list, add index 2 to value list
-# #     if indices 0 and 1 do not exist in dictionary key tuple list, add both the key tuple and value
-# #       remove first element of string
-# # return dictionary
+# add new argument for n of n-gram
+# while len(words) > n
+# "bigram" now equals n-gram
+#     ngram = use range to create tuple up to index n-1
+# if ngram exists in list of keys
+#     append.words[n]
+# else
+#     add new key and value of words[n]
+# return list slice of words[n-1:]    
 
     chains = {}
 
 #     # your code goes here
     words = text_string.split()
 
-    while len(words) > 2:
-        bigram = (words[0], words[1])
+    # Stopped here, close but need to figure out else
+    ngram = tuple(words[i] if i < n + 1 else "" for i in range(len(words)))
+
+
+    while len(words) > n:
+
         if bigram in chains.keys():
             chains[bigram].append(words[2])
                         
@@ -55,6 +62,7 @@ def make_chains(text_string):
         words = words[1:]
 
     return chains
+
 
 def make_text(chains):
     """Takes dictionary of markov chains; returns random text."""
@@ -85,16 +93,17 @@ def make_text(chains):
     return text
 
 
-
 input_path = "green-eggs.txt"
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
 
 # Get a Markov chain
-chains = make_chains(input_text)
+chains = make_chains(input_text, 4)
 
 # Produce random text
-random_text = make_text(chains)
+#random_text = make_text(chains)
 
 print random_text
+
+
