@@ -69,10 +69,10 @@ def make_text(chains):
     
     # your code goes here
     random_phrase = choice(chains.keys())
-    if random_phrase in chains.keys(): # cannot concatenate str and tup
-        text = text + random_phrase + choice(chains[random_phrase])
-        print text
-
+    if random_phrase in chains.keys():
+        text = "{} {} {} {}".format(text, random_phrase[0], random_phrase[1], 
+            choice(chains[random_phrase]))
+    print text
     # return text
 
 
